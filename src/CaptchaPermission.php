@@ -18,8 +18,8 @@ class CaptchaPermission {
   public function handle(ServerRequestInterface $request, ResponseInterface $response, callable $next) {
     if ($parms = $request->getParsedBody()) {
       if(session()->get('_captcha') != $parms['_captcha']){
-        hunter_set_message('验证码错误', 'error');
-        return FALSE;
+        $response->getBody()->write(json_encode(array('code' => 1, 'msg' => '验证码错误')));
+        return $response->withAddedHeader('content-type', 'application/json');
       }
     }
 

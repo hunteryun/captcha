@@ -1,1 +1,13 @@
 <?php
+
+use Gregwar\Captcha\CaptchaBuilder;
+
+/**
+ * Returns the captcha field.
+ */
+function hunter_captcha_field() {
+  $builder = new CaptchaBuilder;
+  $builder->build($width = 100, $height = 38);
+  session()->set('_captcha', $builder->getPhrase());
+  return '<img src="'.$builder->inline().'">';
+}
