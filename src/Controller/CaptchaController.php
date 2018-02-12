@@ -4,7 +4,6 @@ namespace Hunter\captcha\Controller;
 
 use Zend\Diactoros\ServerRequest;
 use Gregwar\Captcha\CaptchaBuilder;
-use Zend\Diactoros\Response;
 
 /**
  * Class Captcha.
@@ -18,7 +17,7 @@ class CaptchaController {
    * @return string
    *   Return make_captcha string.
    */
-  public function make_captcha(ServerRequest $request, Response $response) {
+  public function make_captcha(ServerRequest $request) {
     $builder = new CaptchaBuilder;
     $builder->build($width = 100, $height = 38);
     session()->set('_captcha', $builder->getPhrase());
